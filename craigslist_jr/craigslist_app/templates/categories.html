@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Craigslist Junior</h1>
+<h3>Categories</h3>
+{% for category in all_categories %}
+<div>
+  <a href="{% url 'category_detail' category_id=category.id %}">{{ category.name }}</a>   
+</div>
+{% endfor %}
+<hr>
+<br>
+<a href="{% url 'category_new' %}">Create New Category</a>  
+{% endblock%}

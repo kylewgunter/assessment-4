@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ category.name }}</h1>
+<h4> Description: {{ category.description }}
+<hr>
+<h3>Active Posts:</h3>
+{% for post in category.posts.all %}
+  <div>
+  <a href="{% url 'post_detail' category_id=category.id post_id=post.id %}">{{ post.title }}</a>
+  <br>
+  </div>
+{% endfor %}
+<a href="{% url 'new_post' category_id=category.id %}"> Create New Post </a>
+<hr>
+<a href="{% url 'category_edit' category_id=category.id %}">Edit {{ category.name }}</a>
+<br>
+<br>
+<form method='POST' action="{% url 'category_delete' category_id=category.id %}">
+  {% csrf_token %}
+  <button type='submit'>Delete {{ category.name }}</button>
+</form>
+<br>
+<hr>
+<a href="{% url 'categories' %}">Home</a>
+{% endblock%}
